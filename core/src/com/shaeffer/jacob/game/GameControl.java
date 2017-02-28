@@ -16,6 +16,7 @@ public class GameControl {
     private Tunnel tunnel;
     private PregameObject pregameObj;
     private int Score;
+    private float Scoref;
     private boolean S;
     private double initTime;
     private boolean gameOver;
@@ -34,6 +35,8 @@ public class GameControl {
     private Texture onScreenButtons, returnButton;
     private int internalState;// 0 is playscreen, 1 is highscore screen
     private HighscoreControl highscoreControl;
+    private float difficulty = 1.0f;
+    private float difficultyMultiplier = 50;
 
     public GameControl(GameInfoObject gio){
         this.gio = gio;
@@ -53,13 +56,14 @@ public class GameControl {
 
     public void update(float delta)
     {
+        //delta = 0.01f;
         if(internalState == 0 || internalState == 99)
         {
             if(!gameOver) {
                 if(initiated)
                 {
                     gameOver = !background.update(delta, initiated, player.getPoly());
-                    Gdx.app.log("dev output", gameOver + "");
+                    //Gdx.app.log("dev output", gameOver + "");
                     if(drawOnScreenButtons)
                         player.update(delta, getButtonInput());
                     else
@@ -70,7 +74,8 @@ public class GameControl {
                         double now = System.currentTimeMillis();
                         if (now - initTime > 100)
                         {
-                            Score++;
+                            Scoref += delta*difficulty*difficultyMultiplier;
+                            Score = (int)Scoref;
                             initTime = System.currentTimeMillis();
                         }
                     }
@@ -213,6 +218,7 @@ public class GameControl {
         glyphLayout.reset();
         S = false;
         Score = 0;
+        Scoref = 0f;
         font32 = new BitmapFont(Gdx.files.internal("Fonts/Razer32/Razer32pt.fnt"), false);
         font64 = new BitmapFont(Gdx.files.internal("Fonts/Razer64/Razer64pt.fnt"), false);
         font32.setColor(Color.RED);

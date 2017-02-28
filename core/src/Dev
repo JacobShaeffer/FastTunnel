@@ -1,19 +1,13 @@
 TODO: Phase 1
--game:
-	attach background and tunnel together to ensure sync
-	change the way tunnel moves, instead of the pseudo movmenet they do make them actually move (do the same thing as background, but the collision bars will remain in place)
-		this will allow changes in speed
-	for background and tunnel
-	-change positioning to be on a very large grid (10,000+ ?) and use rounding to get pixel position
-	-this will allow use of delta to calculate position based on time passed not based on processor speed
--go through and make sure nothing is relying directly on processor speed to update that could cause problems
 
+-GameInfoObject error handling!!
+
+-go through and make sure nothing is relying directly on processor speed to update that could cause problems
 -memory leak when in global scores screen
 -tiny leak in ship menu
 	both stop when leaving menu
 -leak in game over scree on high score
 	pretty much gone on return to main
---all of these leave more in memory than they brought in im pretty sure
 
 
 TODO: Phase 2

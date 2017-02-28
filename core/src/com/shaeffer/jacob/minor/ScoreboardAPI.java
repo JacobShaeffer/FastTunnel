@@ -1,13 +1,8 @@
 package com.shaeffer.jacob.minor;
 
-
-import com.badlogic.gdx.Gdx;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-
 
 import io.socket.client.IO;
 import io.socket.client.Socket;

@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Polygon;
 public class Background {
     private Texture background;
     private int y;
-    private float tempY;
+    //private float tempY;
     private static final int Velocity = -300;
     private double difficulty;
     private Tunnel tunnel;
@@ -26,7 +26,7 @@ public class Background {
 
     private void constuctor(int selected)
     {
-        Gdx.app.log("dev output", "background created " + selected);
+        //Gdx.app.log("dev output", "background created " + selected);
         switch (selected)
         {
             case 1:
@@ -35,17 +35,19 @@ public class Background {
             default:
                 background = new Texture("Sprites/Game/background_480x800.png");
         }
-        tempY = 0f;
+        //tempY = 0f;
+        y = 0;
         difficulty = 1.0;
     }
 
-    public void update(float delta)//TODO: fix this with deltatime
+    public void update(float delta)
     {
-        tempY += Velocity * delta * difficulty;
-        y = (int)tempY;
+        //tempY += Velocity * delta * difficulty;
+        //y = (int)tempY;
+        y += Velocity * delta * difficulty;
         if(y <= -800){
             y = 0;
-            tempY = 0;
+            //tempY = 0;
         }
     }
 
@@ -61,7 +63,7 @@ public class Background {
     public void updateDifficulty(double difficulty)
     {
         this.difficulty = difficulty;
-    }
+    }//TODO: difficulty
 
     public void render(SpriteBatch batch)
     {

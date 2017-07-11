@@ -1,5 +1,6 @@
 package com.shaeffer.jacob.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Intersector;
@@ -8,12 +9,15 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Queue;
 
+
 public class Tunnel{
 
     private Texture rectangle;
     private static int WIDTH = 480;
     private static int rectangleCount = 161;
     private int rectHeight, rectWidth, moveX;
+
+    private float currentTime;
 
     private Rectangle boundingBox;
     private Queue<Rectangle> collisionQL;
@@ -62,6 +66,7 @@ public class Tunnel{
             }
             tunnelQ.addFirst(new Vector2(spaceing,currentY));
         }
+        currentTime = 0f;
     }
 
     public void updateDifficulty(double difficulty)
@@ -76,6 +81,11 @@ public class Tunnel{
     }
 
     public boolean update(Polygon poly, float delta){
+        int amplitude = 1;
+        int period = 1;
+        currentTime += delta;
+        double sin_x = Math.sin(3.14159 * amplitude * currentTime) * period;
+        //Gdx.app.log("dev", String.valueOf(sin_x));
         int delta_x = (int)((Math.random() * 2*moveX - moveX));
         int delta_y = (int)(delta * difficulty * Velocity);
 
@@ -124,8 +134,14 @@ public class Tunnel{
         if(tunnelQ.first().y < 810)
         {
             Vector2 temp = tunnelQ.first();
-            if(temp.x+delta_x > (WIDTH-120)){delta_x = WIDTH-120 - (int)temp.x;}
-            else if(temp.x+delta_x < 0){delta_x = 0 - (int)temp.x;}
+            if(temp.x+delta_x > (WIDTH-120))
+            {
+                delta_x = WIDTH-120 - (int)temp.x;
+            }
+            else if(temp.x+delta_x < 0)
+            {
+                delta_x = 0 - (int)temp.x;
+            }
             tunnelQ.addFirst(new Vector2(temp.x + delta_x, temp.y + rectHeight));
         }
         return playing(poly);

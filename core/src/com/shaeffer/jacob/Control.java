@@ -16,6 +16,7 @@ import com.shaeffer.jacob.menus.Scores;
 import com.shaeffer.jacob.menus.Ship;
 import com.shaeffer.jacob.minor.GameInfoObject;
 import com.shaeffer.jacob.minor.NativePlatform;
+import com.shaeffer.jacob.minor.ScreenService;
 
 
 public class Control implements ApplicationListener, InputProcessor
@@ -40,9 +41,12 @@ public class Control implements ApplicationListener, InputProcessor
     private int frames;
     private NativePlatform nativePlatform;
 
-    public Control(NativePlatform nativePlatform)
+    private ScreenService screenService;
+
+    public Control(NativePlatform nativePlatform, ScreenService screenService)
     {
         this.nativePlatform =  nativePlatform;
+        this.screenService = screenService;//TODO: implement me!!
     }
 
     @Override

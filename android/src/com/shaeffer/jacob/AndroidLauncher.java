@@ -7,20 +7,21 @@ import android.widget.RelativeLayout;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
+import com.shaeffer.jacob.minor.ScreenService;
 
 
-public class AndroidLauncher extends AndroidApplication{
+public class AndroidLauncher extends AndroidApplication implements ScreenService{
 
-
+    View gameView;
 
     @Override
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+		//getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         RelativeLayout layout = new RelativeLayout(this);
         AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-        View gameView = initializeForView(new Control(new AndroidPlatform(this)), config);//perahps use android device id for unique id
+        gameView = initializeForView(new Control(new AndroidPlatform(this), this), config);//perahps use android device id for unique id
         layout.addView(gameView);
         setContentView(layout);
 	}
@@ -43,5 +44,16 @@ public class AndroidLauncher extends AndroidApplication{
 							| View.SYSTEM_UI_FLAG_FULLSCREEN
 							| View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);}
 	}
+
+    @Override
+    public void keepScreenOn(final boolean isOn) {
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                gameView.setKeepScreenOn(isOn);
+            }
+        });
+    }
 
 }

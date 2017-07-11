@@ -17,7 +17,7 @@ BREAK
 	up
 		SpriteSheets/Ant/legs_offset_spritesheet.png,4,1,-8,4,1/6,L
 	vert
-		-6,0,18,0,6,36
+		-7,0,19,0,-4,36,16,36
 BREAK
 	Sprites/Player/F-35.png,45,45
 	trail

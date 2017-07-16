@@ -6,7 +6,7 @@ TODO: Phase 1
 -memory leak when in global scores screen
 -tiny leak in ship menu
 	both stop when leaving menu
--leak in game over scree on high score
+-leak in game over screen on high score
 	pretty much gone on return to main
 
 
@@ -23,5 +23,4 @@ TODO: Phase 2
 -finish global scores
 
 -F.I.S.H. art
--El Capitan art
 -F-35 art

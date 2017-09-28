@@ -1,6 +1,8 @@
 package com.shaeffer.jacob.minor;
 
-public interface ScreenService {
+/**
+ * Created by Jacob on 8/27/2017.
+ */
 
-    void keepScreenOn(boolean isOn);
+public interface ScreenService {
 }

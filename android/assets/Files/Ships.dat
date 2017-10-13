@@ -41,7 +41,7 @@ BREAK
 BREAK
 	Sprites/Player/El_Capitan.png,35,60
 	vert
-		0,0,34,0,17,47
+		11,38,6,25,6,20,8,12,18,0,28,12,30,20,30,25,25,38,18,60
 BREAK
 	Sprites/Player/Ship_Sprite.png,34,47
 	up

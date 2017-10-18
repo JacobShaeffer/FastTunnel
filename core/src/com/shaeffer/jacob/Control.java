@@ -39,13 +39,11 @@ public class Control implements ApplicationListener, InputProcessor
     private float timeSinceStart;
     private float initTime;
     private int frames;
-    private NativePlatform nativePlatform;
 
     private ScreenService screenService;
 
-    public Control(NativePlatform nativePlatform, ScreenService screenService)
+    public Control(ScreenService screenService)
     {
-        this.nativePlatform =  nativePlatform;
         this.screenService = screenService;//TODO: implement me!!
     }
 
@@ -58,7 +56,7 @@ public class Control implements ApplicationListener, InputProcessor
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
         Gdx.input.setInputProcessor(this);
 
-        gameInfoObject = new GameInfoObject(nativePlatform);
+        gameInfoObject = new GameInfoObject(screenService);
         gameInfoObject.update();
         background = new Background(0);
         batch = new SpriteBatch();
@@ -242,11 +240,7 @@ public class Control implements ApplicationListener, InputProcessor
     @Override public boolean scrolled(int amount) {return false;}
     @Override public boolean keyDown(int keycode) {return false;}
     @Override public boolean keyUp(int keycode) {return false;}
-    @Override public boolean keyTyped(char character)
-    {
-        gameInfoObject.setKeyTyped(character);
-        return true;
-    }
+    @Override public boolean keyTyped(char character) {return false;}
 
     @Override
     public void pause()

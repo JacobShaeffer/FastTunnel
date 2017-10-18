@@ -9,7 +9,6 @@ import com.shaeffer.jacob.minor.GameInfoObject;
 
 public class Ship {
 
-    private static final int NUM = 2;
     private Texture core, selected, unselected, disabled, grayedOut;
     private Player[] ships;
     private boolean[] enabled;
@@ -53,20 +52,24 @@ public class Ship {
         int returnBtnX = (WIDTH-170)/2;
         int returnBtnY = 108;
 
-        buttons = new int[7][2];//0 is return //1-6 are ship selection buttons
+        buttons = new int[6][2];//0 is return //1-6 are ship selection buttons
         buttons[0][0] = returnBtnX;
         buttons[0][1] = returnBtnY;
 
-        buttons[1][0] = buttons[3][0] = buttons[5][0] = buttonOrigX-120;
-        buttons[2][0] = buttons[4][0] = buttons[6][0] = buttonOrigX+40;
+        buttons[1][0] = buttonOrigX-100;
         buttons[1][1] = buttonOrigY+95;
         buttons[2][1] = buttonOrigY+95;
+        buttons[2][0] = buttonOrigX+20;
         buttons[3][1] = buttonOrigY;
+        buttons[3][0] = buttonOrigX-100;
         buttons[4][1] = buttonOrigY;
+        buttons[4][0] = buttonOrigX+20;
         buttons[5][1] = buttonOrigY-95;
-        buttons[6][1] = buttonOrigY-95;
+        buttons[5][0] = buttonOrigX-40;
+        //buttons[6][1] = buttonOrigY-95;
+        //buttons[6][0] =
 
-        int offsets[][] = new int[8][2];
+        int offsets[][] = new int[5][2];
         //Old Faithful
         offsets[0][0] = 24;
         offsets[0][1] = 20;
@@ -83,20 +86,20 @@ public class Ship {
         offsets[4][0] = 22;
         offsets[4][1] = 12;
         //unimplemented to be F.I.S.H.
-        offsets[5][0] = 24;
-        offsets[5][1] = 20;
+        //offsets[5][0] = 24;
+        //offsets[5][1] = 20;
 
 
         shipSetup(offsets);
 
-        buttRect = new Rectangle[7];
+        buttRect = new Rectangle[6];
         buttRect[0] = new Rectangle(buttons[0][0], buttons[0][1], 170, 63);//return
         buttRect[1] = new Rectangle(buttons[1][0], buttons[1][1], 80, 80);//ship 1
         buttRect[2] = new Rectangle(buttons[2][0], buttons[2][1], 80, 80);//ship 2
         buttRect[3] = new Rectangle(buttons[3][0], buttons[3][1], 80, 80);//ship 3
         buttRect[4] = new Rectangle(buttons[4][0], buttons[4][1], 80, 80);//ship 4
         buttRect[5] = new Rectangle(buttons[5][0], buttons[5][1], 80, 80);//ship 5
-        buttRect[6] = new Rectangle(buttons[6][0], buttons[6][1], 80, 80);//ship 6
+        //buttRect[6] = new Rectangle(buttons[6][0], buttons[6][1], 80, 80);//ship 6
     }
 
     public void render(SpriteBatch batch) {

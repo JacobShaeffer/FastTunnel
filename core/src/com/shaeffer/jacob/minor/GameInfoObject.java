@@ -39,7 +39,7 @@ public class GameInfoObject
     //options
 
     //ships
-    private int implemented = 6;//TODO: update as more ships are added.
+    private int implemented = 5;//TODO: update as more ships are added.
     private int selected;
     private boolean[] unlocked;
     //ships
@@ -50,17 +50,15 @@ public class GameInfoObject
     private boolean nameSet;
     private String[] local;//storage for local highscores
 
-    private static String httpBase = "http://www.chrismiconi.com";
-    private static String port = ":65535/";
     //scores
 
     //other
     private int state;
-    private NativePlatform nativePlatform;
+    private ScreenService screenService;
 
-    public GameInfoObject(NativePlatform nativePlatform)
+    public GameInfoObject(ScreenService screenService)
     {
-        this.nativePlatform = nativePlatform;
+        this.screenService = screenService;
 
         //Gdx.app.log("dev output", "GameInfoObject created");
         //set all values that aren't written to a file here
@@ -86,7 +84,7 @@ public class GameInfoObject
         selected = 0;
         unlocked = new boolean[]{true, true, true, true, true, false};
         local = new String[]{"0!0", "0!0", "0!0", "0!0", "0!0", "0!0", "0!0", "0!0", "0!0", "0!0"};
-        //save();
+        //save();//TODO: remove me
         read();
     }
 
@@ -245,11 +243,6 @@ public class GameInfoObject
         return true;
     }
 
-    public String isOnline()
-    {
-        return nativePlatform.isOnline(wifi);
-    }
-
     //Get functions
     public int getSensitivity() { return sensitivity; }
     //public int getVolume() { return volume; }
@@ -263,8 +256,6 @@ public class GameInfoObject
     public int getImplemented() { return implemented; }
     public boolean[] getUnlocked() { return unlocked.clone(); }
     public String[] getLocal() { return local.clone(); }
-    public String getHttpBase() { return httpBase; }
-    public String getPort() { return port; }
     public int getState() { return state; }
     public float getTouchX() { return touchX; }
     public float getTouchY() { return touchY; }
@@ -290,16 +281,6 @@ public class GameInfoObject
     public boolean getDragged2() { return dragged2; }
     public float getRoll() { return roll; }
     public boolean getPreGame() { return preGame; }
-    public char getKeyTyped()
-    {
-        if(keyTyped != '\u0000')
-        {
-            char c = keyTyped;
-            keyTyped = '\u0000';
-            return c;
-        }
-        return keyTyped;
-    }
 
     //Set functions
     public void setSensitivity(int s) { sensitivity = s; }
@@ -315,6 +296,14 @@ public class GameInfoObject
     public void setLocal(String[] l) { local = l; }
     public void setState(int s)
     {
+        if(s == 4)
+        {
+            screenService.keepScreenOn(true);
+        }
+        else
+        {
+            screenService.keepScreenOn(false);
+        }
         state = s;
         update();
     }
@@ -330,8 +319,4 @@ public class GameInfoObject
     public void setDragged2(boolean d) { dragged2 = d; }
     public void setRoll(float r) { roll = r; }
     public void setPreGame(boolean p) { preGame = p; }
-    public void setKeyTyped(char c)
-    {
-        keyTyped = c;
-    }
 }

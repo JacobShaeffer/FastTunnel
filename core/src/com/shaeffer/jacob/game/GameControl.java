@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.shaeffer.jacob.minor.GameInfoObject;
 
+import java.util.Arrays;
+
 public class GameControl {
     private final int WIDTH = 480, HEIGHT = 800;
     private Background background;
@@ -84,7 +86,6 @@ public class GameControl {
                     if (gameOver)
                     {
                         scoreUpdates = updateScores();
-                        //TODO: if scoreUpdates false, check if there is a pending score to send to server
                         if(scoreUpdates) internalState = 1;
                         gio.setLocal(highscores);
                         highscoreControl.newHighscore(Score);
@@ -116,6 +117,9 @@ public class GameControl {
         }
     }
 
+    ///inserts the current value of Score into the highscores array
+    ///returns true if the new score is a highscore
+    //TODO: if there are problems with new highscores being added it will be here
     private boolean updateScores(){
         boolean retMe;
         //int[] ships = new int[highscores.length];
@@ -128,25 +132,38 @@ public class GameControl {
             scores[i] = Integer.parseInt(temp[1]);
         }
 
+
+        //scores int array of current scores
+        //Score int of new score
+        //highscores str array of local highscores
+
+        String[] newHighscores = new String[highscores.length];
         if(Score > scores[0]){
-            for(int i=highscores.length-1; i>0; i--)
+            newHighscores[0] = String.valueOf(gio.getSelected()) +"!"+ String.valueOf(Score);
+            for(int i=1; i<newHighscores.length; i++)
             {
-                highscores[i] = highscores[i - 1];
+                newHighscores[i] = highscores[i - 1];
             }
-            highscores[0] = String.valueOf(gio.getSelected()) +"!"+ String.valueOf(Score);
+            highscores = Arrays.copyOf(newHighscores, newHighscores.length);
             retMe = true;
         }
         else{
-            for(int i=0; i<scores.length; i++){
-                if(Score > scores[i]){
-                    for(int j=highscores.length-1; j>i+1; j--)
-                    {
-                        highscores[j] = highscores[j - 1];
-                    }
-                    highscores[i] = String.valueOf(gio.getSelected()) +"!"+ String.valueOf(Score);;
-                    i=highscores.length;
+            boolean notInserted = true;
+            int oldHSIndex = 0;
+            for(int i=0; i<newHighscores.length; i++)
+            {
+                if(notInserted && Score > scores[i])
+                {
+                    newHighscores[i] = String.valueOf(gio.getSelected()) +"!"+ String.valueOf(Score);
+                    notInserted = false;
+                }
+                else
+                {
+                    newHighscores[i] = highscores[oldHSIndex];
+                    oldHSIndex++;
                 }
             }
+            highscores = Arrays.copyOf(newHighscores, newHighscores.length);
             retMe = false;
         }
         return retMe;

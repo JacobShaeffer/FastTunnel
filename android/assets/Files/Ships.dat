@@ -43,16 +43,6 @@ BREAK
 	vert
 		11,38,6,25,6,20,8,12,18,0,28,12,30,20,30,25,25,38,18,60
 BREAK
-	Sprites/Player/Ship_Sprite.png,34,47
-	up
-		SpriteSheets/Default/MainThruster_Spritesheet.png,4,2,12,-9,1/6,L
-		SpriteSheets/Default/MinorThruster_Spritesheet.png,4,3,2,-6,1/6,R
-		SpriteSheets/Default/MinorThruster_Spritesheet.png,4,3,25,-6,1/6,R
-	right
-		SpriteSheets/Default/SideThruster_Right_Spritesheet.png,3,1,-2,6,1/12,L
-		SpriteSheets/Default/SideThruster_Right_Spritesheet.png,3,1,9,38,1/12,L
-	left
-		SpriteSheets/Default/SideThruster_Left_Spritesheet.png,3,1,31,6,1/12,L
-		SpriteSheets/Default/SideThruster_Left_Spritesheet.png,3,1,20,38,1/12,L
+	Sprites/Player/Car.png,30,60
 	vert
-		0,0,34,0,17,47
+		7,60,3,53,0,34,3,10,8,0,20,0,27,10,30,34,27,53,21,60

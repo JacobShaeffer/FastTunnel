@@ -39,7 +39,7 @@ public class GameInfoObject
     //options
 
     //ships
-    private int implemented = 5;//TODO: update as more ships are added.
+    private int implemented = 6;//TODO: update as more ships are added.
     private int selected;
     private boolean[] unlocked;
     //ships
@@ -82,7 +82,7 @@ public class GameInfoObject
 
         _id = "";
         selected = 0;
-        unlocked = new boolean[]{true, true, true, true, true, false};
+        unlocked = new boolean[]{true, true, true, true, true, true};
         local = new String[]{"0!0", "0!0", "0!0", "0!0", "0!0", "0!0", "0!0", "0!0", "0!0", "0!0"};
         //save();//TODO: remove me
         read();
